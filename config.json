@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/runnerty/schemas/master/schemas/3.1/config.json",
+  "triggers": [
+    {
+      "id": "schedule_default",
+      "type": "@runnerty-trigger-schedule"
+    }
+  ],
+  "executors": [
+    {
+      "id": "shell_default",
+      "type": "@runnerty-executor-shell"
+    }
+  ],
+  "notifiers": [
+    {
+      "id": "console_default",
+      "type": "@runnerty-notifier-console"
+    }
+  ]
+}
