@@ -8,6 +8,9 @@ A basic Runnerty planification needs just these files:
 - `config.json` - Configuration file for Runnerty's plugins also global values are set here.
 - `plan.json` - The processes planification and dependencies are specified here.
 
+## Before
+You should connect your proyect to [Runnerty platform](https://app.runnerty.io) so you can view your workflow executions.
+
 ## To Use
 
 From your command line:

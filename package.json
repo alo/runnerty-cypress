@@ -1,10 +1,11 @@
 {
-  "name": "runnerty-cypress-testaso",
+  "name": "runnerty-cypress",
   "version": "1.0.0",
   "description": "Runnerty quick start example project",
   "scripts": {
     "start": "runnerty",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
   },
   "repository": {},
   "keywords": [
@@ -16,9 +17,10 @@
   "author": "Runnerty Tech",
   "license": "MIT",
   "dependencies": {
-    "runnerty": "^3.1.0",
+    "@runnerty/executor-cypress": "^3.0.5",
     "@runnerty/executor-shell": "^3.1.0",
     "@runnerty/notifier-console": "^3.0.3",
-    "@runnerty/trigger-schedule": "^3.0.3"
+    "@runnerty/trigger-schedule": "^3.0.3",
+    "runnerty": "^3.1.0"
   }
 }

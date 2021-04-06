@@ -2,35 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/runnerty/schemas/master/schemas/3.1/plan.json",
   "chains": [
     {
-      "id": "CHAIN_ONE",
-      "name": "Chain one sample",
+      "id": "CHAIN_CYPRESS_SAMPLES",
+      "name": "CYPRESS module example chain",
       "triggers": [
         {
           "id": "schedule_default",
-          "schedule_interval": "*/1 * * * *"
+          "schedule_interval": "0 */1 * * *"
         }
       ],
-      "notifications": {
-        "on_start": [
-          {
-            "id": "console_default",
-            "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') START OF THE CHAIN: @GV(CHAIN_ID)"
-          }
-        ],
-        "on_end": [
-          {
-            "id": "console_default",
-            "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') END OF THE CHAIN: @GV(CHAIN_ID)"
-          }
-        ],
-        "on_fail": [
-          {
-            "id": "console_default",
-            "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') FAIL OF THE CHAIN: @GV(CHAIN_ID)",
-            "mode": "error"
-          }
-        ]
-      },
       "defaults_processes": {
         "notifications": {
           "on_start": [
@@ -42,35 +21,37 @@
           "on_fail": [
             {
               "id": "console_default",
-              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') ERROR: PROCESS @GV(PROCESS_ID): @GV(PROCESS_EXEC_ERR_OUTPUT)",
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') ERROR: PROCESS @GV(PROCESS_ID):\n@GV(PROCESS_EXEC_ERR_OUTPUT)",
               "mode": "error"
             }
           ],
           "on_end": [
             {
               "id": "console_default",
-              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') END: PROCESS @GV(PROCESS_ID): @GV(PROCESS_EXEC_MSG_OUTPUT)"
+              "message": "@GETDATE('YYYY-MM-DD HH:mm:ss') END: PROCESS @GV(PROCESS_ID) - TOTAL TESTS PASSES: @GV(PROCESS_EXEC_TOTALPASSED) / TOTAL TESTS FAILED: @GV(PROCESS_EXEC_TOTALFAILED)"
             }
           ]
-        },
-        "output": [
-          {
-            "file_name": "./@GETVALUE(PROCESS_ID).log",
-            "write": [
-              "EXECUTION @GV(PROCESS_ID) - AT @GETDATE('YYYY-MM-DD HH:mm:ss')\n @GV(PROCESS_EXEC_ERR_OUTPUT) @GV(PROCESS_EXEC_MSG_OUTPUT)"
-            ],
-            "concat": true,
-            "maxsize": "10mb"
-          }
-        ]
+        }
       },
       "processes": [
         {
-          "id": "PROCESS_ONE",
-          "name": "Proccess One",
+          "id": "TEST_LOGIN",
+          "name": "Test app.runnerty.io login",
           "exec": {
-            "id": "shell_default",
-            "command": "echo hello world!"
+            "id": "cypress_default",
+            "spec": "./cypress/integration/login.spec.js"
+          }
+        },
+        {
+          "id": "TEST_JOIN",
+          "name": "Tests app.ruunerty.io join (will run all tests in cypress/integration folder)",
+          "depends_process": ["TEST_LOGIN"],
+          "exec": {
+            "id": "cypress_default",
+            "browser": "chrome",
+            "config": {
+              "video": true
+            }
           }
         }
       ]

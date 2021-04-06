@@ -1,0 +1,8 @@
+{
+  "video": true,
+  "baseUrl": "https://app.runnerty.io/",
+  "env": {
+    "username": "test",
+    "password": "this login will fail"
+  }
+}

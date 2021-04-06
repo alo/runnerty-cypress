@@ -1,5 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/runnerty/schemas/master/schemas/3.1/config.json",
+  "general": {
+    "runnerty.io": {
+      "apikey": "YOUR_APIKEY_HERE"
+    }
+  },
   "triggers": [
     {
       "id": "schedule_default",
@@ -10,6 +15,10 @@
     {
       "id": "shell_default",
       "type": "@runnerty-executor-shell"
+    },
+    {
+      "id": "cypress_default",
+      "type": "@runnerty-executor-cypress"
     }
   ],
   "notifiers": [
